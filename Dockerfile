@@ -32,6 +32,13 @@ RUN curl https://dlcdn.apache.org/maven/maven-3/${MAVEN_VERSION}/binaries/apache
   && rm /tmp/maven.tar.gz \
   && ln -s /opt/apache-maven-*/bin/mvn /usr/local/bin/mvn
 
+RUN curl -L https://github.com/SAP/SapMachine/releases/download/sapmachine-17.0.4.1/sapmachine-jdk-17.0.4.1_linux-x64_bin.tar.gz -o /tmp/sapmachine17.tar.gz \
+  && tar -zxf /tmp/sapmachine17.tar.gz -C /opt \
+  && rm /tmp/sapmachine17.tar.gz \
+  && mv /opt/sapmachine-jdk-17* /opt/sapmachine-jdk-17
+
+ENV JAVA_HOME_17_X64=/opt/sapmachine-jdk-17
+
 # Can be 'linux-x64', 'linux-arm64', 'linux-arm', 'rhel.6-x64'.
 ENV TARGETARCH=linux-x64
 
